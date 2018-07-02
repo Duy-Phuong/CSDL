@@ -116,7 +116,7 @@ Group by nvql.MANV
 
 
 -----------------------------------------------------------------------------------------------------------------------------
---30.Với mỗi phòng ban, cho biết tên phòng ban và số lượng đề án mà phòng ban đó chủ trì 
+--32.Với mỗi phòng ban, cho biết tên phòng ban và số lượng đề án mà phòng ban đó chủ trì 
 --yêu cầu xếp giảm dần theo số lượng đề án
 Select pb.TENPHG, count(da.MADA)
 From PHONGBAN pb left join DEAN da on pb.MAPHG = da.PHONG
@@ -125,7 +125,7 @@ Order by count(da.MADA) desc
 
 
 -----------------------------------------------------------------------------------------------------------------------------
---34.Với mỗi đề án, cho biết tên  đề án và số lượng công việc của đề án này.
+--36.Với mỗi đề án, cho biết tên  đề án và số lượng công việc của đề án này.
 Select da.TENDA, count(*) as SoCV 
 From CONGVIEC cv, DEAN da
 Where cv.MADA = da.MADA
@@ -133,7 +133,7 @@ Group by da.MADA, da.TENDA
 
 
 -----------------------------------------------------------------------------------------------------------------------------
---35.Với mỗi công việc trong đề án có mã đề án 'Dao Tao', cho biết số lượng nhân viên được phân công .
+--38.Với mỗi công việc trong đề án có mã đề án 'Dao Tao', cho biết số lượng nhân viên được phân công .
 Select cv.TEN_CONG_VIEC, count(pc.MA_NVIEN) as SoLuongNV
 From CONGVIEC cv join DEAN da on cv.MADA = da.MADA
 				 join PHANCONG pc on pc.MADA = cv.MADA and pc.STT = cv.STT
@@ -234,7 +234,7 @@ Where not exists (Select *
 --có mức lương trên mức lương trung bình của phòng "Nghiên cứu"
 select HONV, TENLOT, TENNV, LUONG, PHG
 from NHANVIEN
-where LUONG > select avg(nv.LUONG)
+where LUONG > (select avg(nv.LUONG)
 		from NHANVIEN nv, PHONGBAN pb
 		where nv.PHG=pb.MAPHG
 		and pb.TENPHG=N'Nghiên cứu' )

@@ -1,0 +1,151 @@
+
+
+--- cấu hình ----
+tải sts: kéo xuống tool dưới cùng nhắp dô ở trang sping.io
+--- tạo project mới ---
+file/new maven project
+chọn next
+click create simple project.../ next 
+groupid: ten dev vd com.abc
+atifactid: ten project
+package: jar => chuyển thành war UD web
+--- download tomcat ----
+gg chọn .zip
+--- run ----
+run on server/ chọn folder chứa tomcat
+hay ấn add r chọn
+------ cách 2 ------- nên lm
+file/new maven project
+chọn next
+k tick create simple project...
+next
+maven-archetype-webapp 1.0
+bt 1 project src/main/java và src/main/resources mà khi tạo k có đủ
+ta chuột phải project/new folder/ chọn trong main của project tạo folder java
+
+---------------------------------------------------------------
+ta chuột phải project/project faucet... ; 
+vào tiếp target runtime;
+ java build path có jre, maven, tomcat
+ java compiler: chọn 1.8 cx dk bt là 1.5
+
+ *** cty ***
+ Tomcat/ update...
+ nhắp vào biểu tượng cat để bien dịch
+ chuot phai chon tomcat để xem link trên localhost:/./...
+ java build path/ jdk 1.6
+
+---------------------------------------------------------------
+các thư viện cần trong pom.xml
+vào maven repository
+ <dependencies>
+  	<!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-webmvc</artifactId>
+	    <version>4.3.14.RELEASE</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/junit/junit -->
+	<dependency>
+	    <groupId>junit</groupId>
+	    <artifactId>junit</artifactId>
+	    <version>4.12</version>
+	    <scope>test</scope>
+	</dependency>
+        <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+    <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>3.1.0</version>
+        <scope>provided</scope>
+    </dependency>
+	
+  </dependencies>
+
+  ----------------------------------------------------------------
+sau đó vào folder src/main/webapp tạo WEB-INF/web.xml để hết lỗi
+ ----------------------------------------------------------------
+ tutorial spoint spring mvc
+vào thư mục web.xml tạo Dispatcher servlet để xl yc
+chỉ cần gõ dispatcherservlet sẽ có gợi ý và nhắp vào
+
+<!-- The front controller of this Spring Web application, responsible for handling all application requests -->
+	<servlet>
+		<servlet-name>thoitrangdispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/thoitrangdispatcher-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!-- Map all requests to the DispatcherServlet for handling -->
+	<servlet-mapping>
+		<servlet-name>thoitrangdispatcher</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+  ----------------------------------------------------------------
+Sau đó tạo 1 class TrangChu bằng cách file/new class/ trangchuCOntroller
+thêm annotation @controller
+    @RequestMapping("/demo")
+	@ResponseBody  //de tra ra ND text khi k có file jsp nằm trong webapp
+	public String demo() {
+		return "demo"; / //tra ve 1 trang "trangchu.jsp" nằm trong webapp
+	}
+tiếp đến chuột phải WEB-INF tạo new spring bean configuration sau đó tích vào mvc, bean, jee, cache ,context
+khai báo context-conponent scan
+<context:component-scan base-package="test1"/>   => tự tìm mapping trong package 
+//cấu hình lại đường dẫn
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<property name = "prefix" value = "/WEB-INF/view/" />
+      <property name = "suffix" value = ".jsp" />
+	</bean>
+	<import resource="classpath:IoC.xml"/> 
+
+    copy cái bean dưới lên trên resource 
+  ----------------------------------------------------------------
+Khi gán biến phải có getter setter hết
+factory method phải là static
+factory-bean thì k cần hàm static 
+https://docs.spring.io/spring/docs/5.0.7.RELEASE/spring-framework-reference/core.html#beans-definition
+http://www.mkyong.com/tutorials/struts-tutorials/
+https://www.java4s.com/spring-mvc/
+https://www.journaldev.com/3531/spring-mvc-hibernate-mysql-integration-crud-example-tutorial
+
+  ----------------------------------------------------------------
+
+  ----------------------------------------------------------------
+
+  ----------------------------------------------------------------
+
+  ----------------------------------------------------------------
+
+  ----------------------------------------------------------------
+
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------
+
+  ----------------------------------------------------------------
+
+  ----------------------------------------------------------------
+
+  ----------------------------------------------------------------
+
+
+connect sql to java: https://www.microsoft.com/en-us/download/details.aspx?displaylang=en&id=11774
+
+EXample:
+https://docs.microsoft.com/en-us/sql/connect/jdbc/connection-url-sample?view=sql-server-2017
+
+vào sql config: sql server network configuration/ Protocol for.../ TCP/ip 
+enable tất cả chọn Ipaddress
+phía dưới tag có TCP Dynammics port 1189
+restart server lại
+
+
+Muốn thêm lib chuột phải project/Build path/ add external archives
+vào thư mục auth trong jdbc 4.0, copy file .dll vào c://windows/system32/
+
+chuột phải project/ resource/ other chọn uttf8 để in chữ có dấu
