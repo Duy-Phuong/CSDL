@@ -149,3 +149,5 @@ Muốn thêm lib chuột phải project/Build path/ add external archives
 vào thư mục auth trong jdbc 4.0, copy file .dll vào c://windows/system32/
 
 chuột phải project/ resource/ other chọn uttf8 để in chữ có dấu
+
+------------------------------------------------------
